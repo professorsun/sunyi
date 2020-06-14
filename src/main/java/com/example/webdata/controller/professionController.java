@@ -28,11 +28,18 @@ public class professionController {
 
     //传入学校名称查询该学校所开设的专业
     @RequestMapping("/profession")
-    public String getProBySchname(HttpServletRequest request, Model model){
+    public String getProDataBySchname(HttpServletRequest request, Model model){
         String schoolName = request.getParameter("schoolName");
 //        List<School> proBySchname = professionMapper.getProBySchname(schoolName);
-        School proBySchname = professionMapper.getProBySchname(schoolName);
-        model.addAttribute("proBySchname",proBySchname);
+        List<School> proBySchname = professionMapper.getProBySchname(schoolName);
+        if(proBySchname!=null){
+            model.addAttribute("proBySchname",proBySchname);
+            System.out.println(proBySchname);
+        }else{
+            System.out.println("nnnnnnnnnnnnnnnnnnnnn");
+        }
+
+
         return "find";
     }
 

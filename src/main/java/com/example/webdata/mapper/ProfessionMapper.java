@@ -4,8 +4,10 @@ import com.example.webdata.model.Gaokao;
 import com.example.webdata.model.School;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ProfessionMapper {
-    Gaokao getProDataBySchname(String schoolName);
-    School getProBySchname(String schoolName);
+   List<Gaokao > getProDataBySchname(String schoolName);
+    List<School> getProBySchname(String schoolName);
 }
