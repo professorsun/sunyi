@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<form action="/getallusers" method="post">
+    <label for="">显示全部用户</label>
+<!--    <input type="text" name="username" placeholder="全部用户">-->
+    <input type="submit" value="查询全部用户">
+</form>
+<h2>首页</h2>
+<ul th:each="user:${userlist}">
+    <li th:text="${user}">名字</li>
+</ul>
+
+<h2 th:utext="${msg}"></h2>
+<p th:utext="${msg2}"></p>
+</body>
+</html>

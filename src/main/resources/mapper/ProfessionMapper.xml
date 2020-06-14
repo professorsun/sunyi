@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.webdata.mapper.ProfessionMapper">
+
+    <select id="getProDataBySchname" resultMap="proAndData">
+        SELECT *
+        FROM zhiyuan.gaokao g,
+             zhiyuan.profession p
+        where g.spname = p.proname
+          and g.name = #{schoolName}
+    </select>
+
+    <resultMap id="proAndData" type="gaokao">
+        <result property="scid" column="scid"/>
+        <result property="average" column="average"/>
+        <result property="year" column="year"/>
+        <result property="min" column="min"/>
+        <result property="min_section" column="min_section"/>
+        <result property="max" column="max"/>
+        <result property="local_province_name" column="local_province_name"/>
+        <result property="local_batch_name" column="local_batch_name"/>
+        <result property="spname" column="spname"/>
+        <result property="name" column="name"/>
+        <result property="local_type_name" column="local_type_name"/>
+        <result property="proscore" column="proscore"/>
+        <result property="type" column="type"/>
+        <association property="profession" javaType="Profession">
+            <result property="proname" column="proname"/>
+            <result property="subject" column="subject"/>
+            <result property="major" column="major"/>
+            <result property="description" column="description"/>
+            <result property="timelength" column="timelength"/>
+            <result property="sort" column="sort"/>
+            <result property="pid" column="pid"/>
+            <result property="code" column="code"/>
+        </association>
+    </resultMap>
+
+
+    <select id="getProBySchname"  resultMap="getProBySchoolName">
+        select s.scid scid,s.name sname,s.description sdesc,p.*
+        from zhiyuan.school s,
+             zhiyuan.profession p,
+             zhiyuan.t_school_profession sp
+        where s.scid = sp.scid
+          and p.pid = sp.pid
+          and s.name = #{schoolName}
+    </select>
+
+
+    <resultMap id="getProBySchoolName" type="school">
+        <result column="scid" property="scid"/>
+        <result column="sname" property="name"/>
+        <result column="sdesc" property="description"/>
+        <collection property="professions" ofType="Profession" javaType="ArrayList">
+            <result column="description" property="description"/>
+            <result column="subject" property="subject"/>
+            <result column="major" property="major"/>
+            <result column="pid" property="pid"/>
+            <result column="proname" property="proname"/>
+            <result column="timelength" property="timelength"/>
+            <result column="classes" property="classes"/>
+            <result column="job" property="job"/>
+            <result column="graduate" property="graduate"/>
+            <result column="code" property="code"/>
+            <result column="sort" property="sort"/>
+        </collection>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/profession" method="post">
+    <label for="">学校 查找</label>
+    <input type="text" name="schoolname" placeholder="学校名">
+    <input type="submit" value="查找">
+
+</form>
+<p th:text="${proBySchname.getAreaname()}" ></p>
+</body>
+</html>
